@@ -1,0 +1,1 @@
+Back in college I must have written dozens of containers in C++ and Java. Got a wild hair and decided to try one in C. If it works out maybe I'll copy/paste for other types and make one similar to qsort. If I actually make a library I'll start a separate git for that.
