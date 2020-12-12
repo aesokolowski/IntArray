@@ -33,6 +33,8 @@ int ia_pop_back(Int_Array *);
    Or even better yet create a hidden file with a single int in it that gets
    incremented every time this failure occurs and if it happens over 5000 times
    or whatever tell the user to go back to JavaScript as an Easter Egg.
+
+   Oh yeah, pop_back, pop_front and extract also act/will act the same way
 */
 int ia_back(Int_Array *);
 int ia_front(Int_Array *);
@@ -53,7 +55,7 @@ ia_push_front
 ia_pop_front
 ia_insert (this and the next one can probably call push and pop for front and
            back and have special implementations for within the structure)
-ia_remove (this, ia_insert and ia_push_front will be extremely expensive,
+ia_extract (this, ia_insert and ia_push_front will be extremely expensive,
            use sparingly)
 ia_begin -- return a pointer to the beginning of array
 ia_end -- return a pointer to the end of the array

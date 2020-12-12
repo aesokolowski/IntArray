@@ -79,6 +79,13 @@ int main()
  
     printf("ia_size(my_ia): %zu\n", ia_size(my_ia));
 
+    printf("now let's loop and print every single element using ia_at(my_ia, i):\n");
+
+    for (size_t i = 0; i < ia_size(my_ia); i++) {
+        printf("%d   ", ia_at(my_ia, i));
+    }
+    printf("\n");
+
     printf("...now let's try deleting it...\n");
 
     my_ia = delete_int_array(my_ia); // if you don't overwrite my_ia with the

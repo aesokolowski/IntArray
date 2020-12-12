@@ -78,6 +78,16 @@ int ia_front(Int_Array *ia)
     return INT_MIN;
 }
 
+int ia_at(Int_Array *ia, size_t idx)
+{
+    if (idx >= 0 && idx < ia->size) {
+        return ia->raw[idx];
+    }
+
+    fprintf(stderr, "ERR: Out of bounds! Check your bounds!\n");
+    return INT_MIN;
+}
+
 size_t ia_size(Int_Array *ia)
 {
     return ia->size;
