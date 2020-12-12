@@ -3,7 +3,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define ORIG_CAP 5
+#define ORIG_CAP 6
+#define MAX_CAP 5000000
 
 struct _Int_Array
 {
@@ -26,25 +27,37 @@ Int_Array *delete_int_array(Int_Array *ia)
 {
     free(ia->raw);
     ia->raw = NULL;
-    free(ia);
+//    free(ia);
     ia = NULL;
     return ia;
 }
 
-void ia_push_back(Int_Array *ia, int n)
+void ia_push_back(Int_Array **ia, int n)
 {
-    if (ia->size < ia->capacity) {
-        ia->raw[ia->size++] = n;
+    Int_Array *temp1 = NULL;
+    Int_Array *temp2 = *ia;
+
+    if (temp2->size < temp2->capacity - 1) {
+        temp2->raw[temp2->size++] = n;
     } else {
-        fprintf(stderr,
-                "ERR: Capacity reached! Somebody call the programmer!\n");
-        return;
+        size_t new_cap = temp2->capacity * 2;
+        // let's limit the size of the array to 5 mill ints for now
+        if (new_cap > MAX_CAP) {
+            fprintf(stderr,
+                    "ERR: Failed to push. Already at maximum capacity!");
+            return;
+        }
+        temp2->raw[temp2->size++] = n;
+        temp2->capacity = new_cap;
+        temp1 = realloc(temp2, new_cap * sizeof(int));
+    }
+    
+    if (temp1) {
+        *ia = temp1;
+        free(temp1);
+        temp1 = NULL;
     }
 
-    // TODO: write grow helper function and plug in above else block.
-    // forward declaraction should be in this .c, not in the .h,
-    // and use some fancy preprocessor mangling to simulate private
-    // helper functions of a C++/Java class
     return;
 }
 

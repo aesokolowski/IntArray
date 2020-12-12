@@ -42,12 +42,12 @@ int main()
 
     printf("Cool beans, now let's add six values {1, 200, 3000, -4, -50, -60000}\n");
 
-    ia_push_back(my_ia, 1);
-    ia_push_back(my_ia, 200);
-    ia_push_back(my_ia, 3000);
-    ia_push_back(my_ia, -4);
-    ia_push_back(my_ia, -50);
-    ia_push_back(my_ia, -6000);
+    ia_push_back(&my_ia, 1);
+    ia_push_back(&my_ia, 200);
+    ia_push_back(&my_ia, 3000);
+    ia_push_back(&my_ia, -4);
+    ia_push_back(&my_ia, -50);
+    ia_push_back(&my_ia, -6000);
 
     printf("Let's take another look at the back:\n");
 
@@ -83,14 +83,26 @@ int main()
 
     for (size_t i = 0; i < ia_size(my_ia); i++) {
         printf("%d   ", ia_at(my_ia, i));
+        if (i == ia_size(my_ia) - 1) {
+            printf("\n");
+        }
     }
-    printf("\n");
+
+    printf("just for fun let's see what happens when we try to peek at something out of\nbounds: ");
+    fflush(stdout);
+    
+    int_0 = ia_at(my_ia, -1);
+    if (int_0 != INT_MIN) {
+        // currently unreachable
+        printf("%d\n", int_0);
+    }
 
     printf("...now let's try deleting it...\n");
 
     my_ia = delete_int_array(my_ia); // if you don't overwrite my_ia with the
                                  // return value you'll be left with a
-                                 // dangling pointer!
+                                 // dangling pointer unless you NULL it
+                                 // yourself!
     
     printf("my_ia: ");
     if (my_ia) {
