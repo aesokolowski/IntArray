@@ -102,8 +102,13 @@ int main()
 
     printf("...now let's try deleting it...\n");
     printf("address before delete: %p\n", my_ia);
-    // only deletes internals now (might switch back)
     my_ia = delete_int_array(my_ia);
+
+    if (!my_ia) {
+        printf("Deletion succesful\n");
+    } else {
+        printf("Deletion failed\n");
+    }
 
     return 0;
 }

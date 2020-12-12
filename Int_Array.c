@@ -26,7 +26,9 @@ Int_Array *make_empty_int_array()
 Int_Array *delete_int_array(Int_Array *ia)
 {
     free(ia->raw);
-    ia->raw = NULL;;
+    ia->raw = NULL;
+    free(ia);
+    ia = NULL;
     return ia;
 }
 
@@ -59,8 +61,6 @@ Int_Array *ia_push_back(Int_Array **ia, int n)
    
     if (temp1) {
         *ia = temp1;
-        free(temp1);
-        temp1 = NULL;
     }
 
     return *ia;
