@@ -18,7 +18,7 @@ Int_Array *make_empty_int_array();
 Int_Array *delete_int_array(Int_Array *);
 
 // modifiers:
-Int_Array *ia_push_back(Int_Array **, int /* value to push */);
+void ia_push_back(Int_Array **, int /* value to push */);
 int ia_pop_back(Int_Array *);
 
 // access:

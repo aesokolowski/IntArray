@@ -32,38 +32,31 @@ Int_Array *delete_int_array(Int_Array *ia)
     return ia;
 }
 
-Int_Array *ia_push_back(Int_Array **ia, int n)
+void ia_push_back(Int_Array **ia, int n)
 {
-    Int_Array *temp1 = NULL;
-    Int_Array *temp2 = *ia;
+    Int_Array *new_ia = NULL;
+    Int_Array *copy = *ia;
 
-    if (temp2->size < temp2->capacity - 1) {
-        temp2->raw[temp2->size++] = n;
+    if (copy->size < copy->capacity - 1) {
+        copy->raw[copy->size++] = n;
     } else {
-        size_t new_cap = temp2->capacity * 2;
+        size_t new_cap = copy->capacity * 2;
         // let's limit the size of the array to 5 mill ints for now
         if (new_cap > MAX_CAP) {
             fprintf(stderr,
                     "ERR: Failed to push. Already at maximum capacity!");
-            return *ia;
+            return;
         }
-        temp2->raw[temp2->size++] = n;
-        temp2->capacity = new_cap;
-        temp1 = realloc(temp2, new_cap * sizeof(int));
+        copy->raw[copy->size++] = n;
+        copy->capacity = new_cap;
+        new_ia = realloc(copy, new_cap * sizeof(int));
     }
-
-    //DEBUG
-    printf("\ntemp1: %p\n", temp1);
-    printf("temp2: %p\n", temp2);
-    printf("*ia: %p\n", *ia);
-    printf("ia: %p\n\n", ia);
-    //END DEBUG
    
-    if (temp1) {
-        *ia = temp1;
+    if (new_ia) {
+        *ia = new_ia;
     }
 
-    return *ia;
+    return;
 }
 
 int ia_pop_back(Int_Array *ia)

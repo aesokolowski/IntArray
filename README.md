@@ -1,1 +1,4 @@
-Back in college I must have written dozens of containers in C++ and Java. Got a wild hair and decided to try one in C. If it works out maybe I'll copy/paste for other types and make one similar to qsort (accepts void pointers). If I actually make a library I'll start a separate git for that.
+Back in college I must have written dozens of containers in C++ and Java. Got a wild hair and decided to try one in C. If it works out maybe I'll copy/paste for other types and make one similar to qsort (accepts void pointers). I don't plan on making a library but if I find this enjoyable who knows. Unlike the roman numeral project which is meant to be kept simple this can go on for awhile before bloat.
+
+convention log:
+1. in order to use a function that does not change the size of the array, you can just pass the pointer, but for push/pop/insert/extract kind of things, you need to pass an address to the pointer. Unlike C++ or Java there's no pass-by-reference. Think of swap in C as opposed to C++. That said in development I usually just pass the pointer until I actually implent the resize.
