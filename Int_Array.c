@@ -26,13 +26,11 @@ Int_Array *make_empty_int_array()
 Int_Array *delete_int_array(Int_Array *ia)
 {
     free(ia->raw);
-    ia->raw = NULL;
-//    free(ia);
-    ia = NULL;
+    ia->raw = NULL;;
     return ia;
 }
 
-void ia_push_back(Int_Array **ia, int n)
+Int_Array *ia_push_back(Int_Array **ia, int n)
 {
     Int_Array *temp1 = NULL;
     Int_Array *temp2 = *ia;
@@ -45,20 +43,27 @@ void ia_push_back(Int_Array **ia, int n)
         if (new_cap > MAX_CAP) {
             fprintf(stderr,
                     "ERR: Failed to push. Already at maximum capacity!");
-            return;
+            return *ia;
         }
         temp2->raw[temp2->size++] = n;
         temp2->capacity = new_cap;
         temp1 = realloc(temp2, new_cap * sizeof(int));
     }
-    
+
+    //DEBUG
+    printf("\ntemp1: %p\n", temp1);
+    printf("temp2: %p\n", temp2);
+    printf("*ia: %p\n", *ia);
+    printf("ia: %p\n\n", ia);
+    //END DEBUG
+   
     if (temp1) {
         *ia = temp1;
         free(temp1);
         temp1 = NULL;
     }
 
-    return;
+    return *ia;
 }
 
 int ia_pop_back(Int_Array *ia)

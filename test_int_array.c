@@ -49,6 +49,9 @@ int main()
     ia_push_back(&my_ia, -50);
     ia_push_back(&my_ia, -6000);
 
+    printf("Hit a snag here with the pointers so let's take a peek: %p\n",
+            my_ia);
+
     printf("Let's take another look at the back:\n");
 
     if (!(ia_empty(my_ia))) {
@@ -98,18 +101,9 @@ int main()
     }
 
     printf("...now let's try deleting it...\n");
-
-    my_ia = delete_int_array(my_ia); // if you don't overwrite my_ia with the
-                                 // return value you'll be left with a
-                                 // dangling pointer unless you NULL it
-                                 // yourself!
-    
-    printf("my_ia: ");
-    if (my_ia) {
-        printf("%p\n", my_ia);
-    } else {
-        printf("NULL\n");
-    }
+    printf("address before delete: %p\n", my_ia);
+    // only deletes internals now (might switch back)
+    my_ia = delete_int_array(my_ia);
 
     return 0;
 }
