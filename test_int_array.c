@@ -71,7 +71,7 @@ int main()
     printf("Now let's pop the back off:\n");
 
     if (!(ia_empty(my_ia))) {
-        printf("ia_pop_back(my_ia): %d\n", ia_pop_back(my_ia));
+        printf("ia_pop_back(my_ia): %d\n", ia_pop_back(&my_ia));
     }
 
     printf("Nice, nice, now let's get the back and size again:\n");
@@ -99,6 +99,15 @@ int main()
         // currently unreachable
         printf("%d\n", int_0);
     }
+
+    printf("let's add another umm... 100 items to see if it still works...\n");
+
+    for (int i = 0; i < 100; i++) {
+        ia_push_back(&my_ia, i * 117);
+        printf("%zu ", ia_size(my_ia));
+    }
+
+    printf("\nsize: %zu\n", ia_size(my_ia));
 
     printf("...now let's try deleting it...\n");
     printf("address before delete: %p\n", my_ia);

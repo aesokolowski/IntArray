@@ -37,32 +37,44 @@ void ia_push_back(Int_Array **ia, int n)
     Int_Array *new_ia = NULL;
     Int_Array *copy = *ia;
 
+    //DEBUG
+     printf("\ncopy: %p", copy);
+     printf("\ncopy->size: %zu", copy->size);
+     printf("\ncopy=>capacity: %zu\n", copy->capacity);
+    //END DEBUG
     if (copy->size < copy->capacity - 1) {
-        copy->raw[copy->size++] = n;
+        copy->raw[copy->size] = n;
+        copy->size++;
     } else {
         size_t new_cap = copy->capacity * 2;
+        printf("\nexpanding... new_cap: %zu\n", new_cap); //DEBUG
         // let's limit the size of the array to 5 mill ints for now
         if (new_cap > MAX_CAP) {
             fprintf(stderr,
                     "ERR: Failed to push. Already at maximum capacity!");
             return;
         }
-        copy->raw[copy->size++] = n;
+        copy->raw[copy->size] = n;
+        copy->size++;
         copy->capacity = new_cap;
-        new_ia = realloc(copy, new_cap * sizeof(int));
+        new_ia = (Int_Array *) realloc(copy, sizeof(int) * new_cap);
     }
    
     if (new_ia) {
         *ia = new_ia;
+        ia = &new_ia;
     }
 
     return;
 }
 
-int ia_pop_back(Int_Array *ia)
+int ia_pop_back(Int_Array **ia)
 {
-   if (ia->size > 0) {
-       return ia->raw[--ia->size];
+   Int_Array *copy = *ia;
+
+   if (copy->size > 0) {
+       --copy->size;;
+       return copy->raw[copy->size];
    }
 
    fprintf(stderr, "ERR: Empty array! Nothing to pop!\n");

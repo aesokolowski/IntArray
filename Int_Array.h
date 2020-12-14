@@ -19,7 +19,7 @@ Int_Array *delete_int_array(Int_Array *);
 
 // modifiers:
 void ia_push_back(Int_Array **, int /* value to push */);
-int ia_pop_back(Int_Array *);
+int ia_pop_back(Int_Array **);
 
 // access:
 /* All return MIN_INT on failure. My logic being that the absolute value of
@@ -50,7 +50,6 @@ _bool_ ia_empty(Int_Array *);
 // algos?:
 
 /* roadmap:
-expand ia_push_back to expand and reallocate
 ia_push_front
 ia_pop_front
 ia_insert (this and the next one can probably call push and pop for front and
